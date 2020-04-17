@@ -1,6 +1,8 @@
 # ArduinoAirQuality
 A base for a arduino with ability to test airqulity and display results on a screen
 
+(Working on ArduinoIDE 1.6.8)
+
 ## Hardware
 
 * ### Screen and libraries

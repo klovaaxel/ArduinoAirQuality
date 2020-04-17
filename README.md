@@ -24,4 +24,5 @@ A base for a arduino with ability to test airqulity and display results on a scr
 
   * [Electrokit.com listing](https://www.electrokit.com/produkt/luftkvalitetssensor-ccs811-monterad-pa-kort/)
   * [Documentation on connecting and programming](https://learn.sparkfun.com/tutorials/ccs811-air-quality-breakout-hookup-guide#arduino-library-and-usage)
+  * [Sparkfun library](https://github.com/sparkfun/SparkFun_CCS811_Arduino_Library/)
 

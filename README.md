@@ -28,5 +28,5 @@ A base for a arduino with ability to test airqulity and display results on a scr
   
 * ### Case
   ![Case for arduino](https://cdn.thingiverse.com/assets/95/5f/7b/c4/30/ArduinoCase.PNG)
-  *[Basic case on thingiverse.com](https://www.thingiverse.com/thing:4293338)
+  * [Basic case on thingiverse.com](https://www.thingiverse.com/thing:4293338)
 

@@ -21,17 +21,16 @@ MCUFRIEND_kbv tft;           // Declares MCUFRIEND_kbv as tft
 #define CCS811_ADDR 0x5B     // Default I2C Address
 //#define CCS811_ADDR 0x5A   // Alternate I2C Address
 
-CCS811 myCCS811(CCS811_ADDR);  
-
+CCS811 myCCS811(CCS811_ADDR);
 
 void setup() {
   Serial.begin(9600);
 
   Serial.print("serial started");
-  
+
   // Air quality sensor
   //myCCS811.begin();
-  
+
   // Screen
   uint16_t ID = tft.readID();
   if (ID == 0xD3) ID = 0x9481;
@@ -40,6 +39,21 @@ void setup() {
   tft.fillScreen(BLACK);
 
   Serial.print("setup complete");
+
+  for (int i = 20; i > 0; i--) { // Timer for the warmup time of sensor
+    Serial.print(i); // Debug
+
+    char str[8];
+    itoa( i, str, 10 ); // Converts int to char to display on screen
+
+    tft.fillScreen(BLACK);
+    showmsgXY(95, 200, 5, &FreeSans12pt7b, str); // Prints remaining minutes on screen
+
+
+    //delay(59000); // Time to wait between minutes
+    delay(5000);  // Debug time
+  }
+  tft.fillScreen(BLACK);
 
 }
 
@@ -50,7 +64,6 @@ void loop() {
 
   Serial.print("text printed");
 
-  
   // Air quality sensor
 //  if (myCCS811.dataAvailable())
 //  {
@@ -64,7 +77,7 @@ void loop() {
 //  }
 //
 //  delay(1000); //Wait for next reading
-//  
+//
 }
 
 void showmsgXY(int x, int y, int sz, const GFXfont *f, const char *msg)

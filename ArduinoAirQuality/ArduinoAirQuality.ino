@@ -25,11 +25,11 @@ CCS811 myCCS811(CCS811_ADDR);
 
 void setup() {
   Serial.begin(9600);
-
+    
   Serial.print("serial started");
 
   // Air quality sensor
-  //myCCS811.begin();
+  myCCS811.begin();
 
   // Screen
   uint16_t ID = tft.readID();
@@ -41,43 +41,50 @@ void setup() {
   Serial.print("setup complete");
 
   for (int i = 20; i > 0; i--) { // Timer for the warmup time of sensor
-    Serial.print(i); // Debug
+    //Serial.print(i); // Debug msg
 
     char str[8];
     itoa( i, str, 10 ); // Converts int to char to display on screen
 
     tft.fillScreen(BLACK);
-    showmsgXY(95, 200, 5, &FreeSans12pt7b, str); // Prints remaining minutes on screen
+    showmsgXY(95, 200, 5, &FreeSans12pt7b, str); //prints remaining minutes on screen
 
 
-    //delay(59000); // Time to wait between minutes
-    delay(5000);  // Debug time
+    delay(59000); // Time to wait between minutes
+    //delay(5000);  // Debug time
   }
   tft.fillScreen(BLACK);
 
 }
 
 void loop() {
-  // Screen
-  showmsgXY(20, 100, 2, &FreeSans12pt7b, "tempCO2");
-  showmsgXY(20, 200, 2, &FreeSans12pt7b, "tempVOC");
+  //converts sensor readings to char
+  char tempCO2str[8];
+  int tempCO2i;
+  itoa( tempCO2i, tempCO2str, 10 ); // Converts int to char to display on screen
 
-  Serial.print("text printed");
+  char tempVOCstr[8];
+  int tempVOCi;
+  itoa( tempVOCi, tempVOCstr, 10 ); // Converts int to char to display on screen
+  
+  // Screen
+  showmsgXY(20, 100, 2, &FreeSans12pt7b, tempCO2str);
+  showmsgXY(20, 200, 2, &FreeSans12pt7b, tempVOCstr);
 
   // Air quality sensor
-//  if (myCCS811.dataAvailable())
-//  {
-//    myCCS811.readAlgorithmResults();
-//    int tempCO2 = myCCS811.getCO2();
-//    int tempVOC = myCCS811.CCS811::getTVOC();
-//  }
-//  else if (myCCS811.checkForStatusError())
-//  {
-//    while(1);
-//  }
-//
-//  delay(1000); //Wait for next reading
-//
+  if (myCCS811.dataAvailable())
+  {
+    myCCS811.readAlgorithmResults();
+    int tempCO2 = myCCS811.getCO2();
+    int tempVOC = myCCS811.CCS811::getTVOC();
+  }
+  else if (myCCS811.checkForStatusError())
+  {
+    while(1);
+  }
+
+  delay(1000); //Wait for next reading
+
 }
 
 void showmsgXY(int x, int y, int sz, const GFXfont *f, const char *msg)
